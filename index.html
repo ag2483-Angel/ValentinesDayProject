@@ -126,13 +126,251 @@
       from { transform: scale(.96); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+
+    /* ========== SERENADE PAGE ========== */
+    .serenade-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: radial-gradient(ellipse at bottom, #1a0a2e 0%, #0d0015 60%, #000 100%);
+      overflow: hidden;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .serenade-overlay.active {
+      display: flex;
+      animation: fadeInSerenade 1s ease;
+    }
+
+    @keyframes fadeInSerenade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Stars background */
+    .stars {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 2s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.3; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Stage glow */
+    .stage-glow {
+      position: absolute;
+      bottom: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 50%;
+      background: radial-gradient(ellipse at center, rgba(255, 59, 122, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Serenade content */
+    .serenade-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .serenade-title {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 900;
+      margin: 0 0 6px;
+      background: linear-gradient(135deg, #ff6b9d, #ffd700, #ff6b9d);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .serenade-subtitle {
+      font-size: clamp(14px, 2.5vw, 22px);
+      color: #ffb3d0;
+      margin: 0 0 24px;
+      font-style: italic;
+    }
+
+    /* Mariachi band SVG */
+    .mariachi-stage {
+      width: min(600px, 90vw);
+      margin: 0 auto 20px;
+      display: block;
+      filter: drop-shadow(0 10px 30px rgba(255, 59, 122, 0.3));
+    }
+
+    /* Musicians sway animation */
+    .musician-sway {
+      transform-origin: bottom center;
+      animation: sway 2s ease-in-out infinite alternate;
+    }
+    .musician-sway:nth-child(2) { animation-delay: 0.3s; }
+    .musician-sway:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes sway {
+      from { transform: rotate(-2deg); }
+      to { transform: rotate(2deg); }
+    }
+
+    /* Floating musical notes */
+    .floating-notes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .music-note {
+      position: absolute;
+      font-size: 28px;
+      opacity: 0;
+      animation: floatNote 4s ease-in-out infinite;
+    }
+
+    @keyframes floatNote {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.5);
+      }
+      15% { opacity: 0.9; }
+      85% { opacity: 0.9; }
+      100% {
+        opacity: 0;
+        transform: translateY(-300px) rotate(30deg) scale(1.2);
+      }
+    }
+
+    /* Floating hearts */
+    .floating-heart {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0;
+      animation: floatHeart 5s ease-in-out infinite;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.3);
+      }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.6; }
+      100% {
+        opacity: 0;
+        transform: translateY(-350px) scale(1);
+      }
+    }
+
+    /* Music control button */
+    .music-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      font-size: clamp(16px, 2.5vw, 20px);
+      font-weight: 800;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 215, 0, 0.5);
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff3b7a, #c2185b);
+      color: #fff;
+      box-shadow: 0 6px 30px rgba(255, 59, 122, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      top: auto;
+      transform: none;
+      z-index: 20;
+    }
+    .music-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 40px rgba(255, 59, 122, 0.6), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .music-btn:active {
+      transform: scale(0.97);
+    }
+
+    .music-btn .btn-icon {
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    /* Equalizer bars */
+    .equalizer {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 22px;
+      margin-left: 6px;
+    }
+    .eq-bar {
+      width: 4px;
+      background: #ffd700;
+      border-radius: 2px;
+      animation: eqBounce 0.6s ease-in-out infinite alternate;
+    }
+    .eq-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+    .eq-bar:nth-child(2) { height: 16px; animation-delay: 0.15s; }
+    .eq-bar:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+    .eq-bar:nth-child(4) { height: 20px; animation-delay: 0.1s; }
+    .eq-bar:nth-child(5) { height: 12px; animation-delay: 0.25s; }
+
+    .equalizer.paused .eq-bar {
+      animation-play-state: paused;
+      height: 4px !important;
+    }
+
+    @keyframes eqBounce {
+      from { height: 4px; }
+      to { height: 22px; }
+    }
+
+    /* Spotlight sweep */
+    .spotlight {
+      position: absolute;
+      top: 0;
+      left: -30%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,215,0,0.03), transparent);
+      animation: spotlightSweep 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes spotlightSweep {
+      0% { left: -60%; }
+      100% { left: 100%; }
+    }
   </style>
 </head>
 
 <body>
   <canvas id="confettiCanvas"></canvas>
 
-  <main class="card">
+  <main class="card" id="mainCard">
     <!-- ANIMAL WITH HEART -->
     <svg class="art" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -179,10 +417,10 @@
     </section>
 
     <!-- HINT -->
-    <div class="hint" id="hint">“No” seems a bit uncomfortable with you touching him😈</div>
+    <div class="hint" id="hint">"No" seems a bit uncomfortable with you touching him</div>
 
     <section class="result" id="result">
-      <h2>Yippe!🎉</h2>
+      <h2>Yippe!</h2>
       <img
         class="fireworks"
         src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
@@ -191,12 +429,241 @@
     </section>
   </main>
 
+  <!-- ========== MARIACHI SERENADE OVERLAY ========== -->
+  <div class="serenade-overlay" id="serenadeOverlay">
+    <div class="stars" id="starsContainer"></div>
+    <div class="stage-glow"></div>
+    <div class="spotlight"></div>
+    <div class="floating-notes" id="floatingNotes"></div>
+
+    <div class="serenade-content">
+      <h1 class="serenade-title">A Serenade for Nylah</h1>
+      <p class="serenade-subtitle">From my heart to yours, mi amor</p>
+
+      <!-- MARIACHI BAND SVG -->
+      <svg class="mariachi-stage" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="suit" x1="0" x2="1">
+            <stop offset="0" stop-color="#1a1a2e"/>
+            <stop offset="1" stop-color="#16213e"/>
+          </linearGradient>
+          <linearGradient id="gold-trim" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffd700"/>
+            <stop offset="1" stop-color="#daa520"/>
+          </linearGradient>
+          <linearGradient id="skin" x1="0" x2="1">
+            <stop offset="0" stop-color="#d4a574"/>
+            <stop offset="1" stop-color="#c4956a"/>
+          </linearGradient>
+          <linearGradient id="guitar-body" x1="0" x2="1">
+            <stop offset="0" stop-color="#8B4513"/>
+            <stop offset="1" stop-color="#654321"/>
+          </linearGradient>
+          <radialGradient id="trumpet-bell">
+            <stop offset="0" stop-color="#ffd700"/>
+            <stop offset="1" stop-color="#b8860b"/>
+          </radialGradient>
+        </defs>
+
+        <!-- ===== GUITARIST (LEFT) ===== -->
+        <g class="musician-sway" transform="translate(80, 20)">
+          <!-- Sombrero -->
+          <ellipse cx="70" cy="42" rx="52" ry="10" fill="#1a1a2e"/>
+          <ellipse cx="70" cy="38" rx="32" ry="22" fill="#1a1a2e"/>
+          <ellipse cx="70" cy="38" rx="32" ry="20" fill="#16213e"/>
+          <rect x="42" y="30" width="56" height="4" rx="2" fill="url(#gold-trim)"/>
+          <ellipse cx="70" cy="22" rx="20" ry="10" fill="#16213e"/>
+
+          <!-- Head -->
+          <ellipse cx="70" cy="68" rx="20" ry="22" fill="url(#skin)"/>
+          <!-- Eyes -->
+          <ellipse cx="62" cy="66" rx="3" ry="3.5" fill="#1a1a2e"/>
+          <ellipse cx="78" cy="66" rx="3" ry="3.5" fill="#1a1a2e"/>
+          <!-- Mustache -->
+          <path d="M60 76 Q65 72 70 76 Q75 72 80 76" stroke="#3d2b1f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Smile -->
+          <path d="M63 80 Q70 86 77 80" stroke="#a0522d" stroke-width="1.5" fill="none"/>
+
+          <!-- Body / Chaqueta -->
+          <path d="M45 88 L40 200 L100 200 L95 88 Q70 82 45 88Z" fill="url(#suit)"/>
+          <!-- Gold trim on jacket -->
+          <line x1="55" y1="92" x2="55" y2="195" stroke="#daa520" stroke-width="1.5"/>
+          <line x1="85" y1="92" x2="85" y2="195" stroke="#daa520" stroke-width="1.5"/>
+          <!-- Buttons -->
+          <circle cx="70" cy="110" r="3" fill="#ffd700"/>
+          <circle cx="70" cy="130" r="3" fill="#ffd700"/>
+          <circle cx="70" cy="150" r="3" fill="#ffd700"/>
+          <!-- Bow tie -->
+          <path d="M60 90 L70 94 L80 90 L70 98Z" fill="#c41e3a"/>
+
+          <!-- Left arm holding guitar neck -->
+          <path d="M45 95 Q20 130 28 170" stroke="url(#skin)" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <!-- Right arm strumming -->
+          <path d="M95 95 Q115 140 105 165" stroke="url(#skin)" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <!-- Hand detail -->
+          <circle cx="28" cy="170" r="8" fill="#c4956a"/>
+          <circle cx="105" cy="165" r="8" fill="#c4956a"/>
+
+          <!-- Guitar -->
+          <rect x="20" y="120" width="6" height="70" rx="3" fill="#654321" transform="rotate(-15, 23, 155)"/>
+          <ellipse cx="55" cy="175" rx="30" ry="22" fill="url(#guitar-body)"/>
+          <ellipse cx="55" cy="175" rx="28" ry="20" fill="#7B3F00" opacity="0.3"/>
+          <ellipse cx="55" cy="175" rx="8" ry="8" fill="#3d2b1f"/>
+          <!-- Strings -->
+          <line x1="30" y1="130" x2="50" y2="195" stroke="#e8d5b5" stroke-width="0.5"/>
+          <line x1="33" y1="128" x2="55" y2="195" stroke="#e8d5b5" stroke-width="0.5"/>
+          <line x1="36" y1="127" x2="60" y2="195" stroke="#e8d5b5" stroke-width="0.5"/>
+
+          <!-- Pants -->
+          <rect x="42" y="195" width="25" height="80" rx="4" fill="#1a1a2e"/>
+          <rect x="73" y="195" width="25" height="80" rx="4" fill="#1a1a2e"/>
+          <!-- Pant trim -->
+          <line x1="44" y1="200" x2="44" y2="270" stroke="#daa520" stroke-width="1.5"/>
+          <line x1="96" y1="200" x2="96" y2="270" stroke="#daa520" stroke-width="1.5"/>
+          <!-- Boots -->
+          <rect x="40" y="268" width="30" height="14" rx="6" fill="#2d1b0e"/>
+          <rect x="70" y="268" width="30" height="14" rx="6" fill="#2d1b0e"/>
+        </g>
+
+        <!-- ===== TRUMPET PLAYER (CENTER) ===== -->
+        <g class="musician-sway" transform="translate(230, 5)">
+          <!-- Sombrero (slightly larger - lead) -->
+          <ellipse cx="70" cy="37" rx="56" ry="11" fill="#1a1a2e"/>
+          <ellipse cx="70" cy="33" rx="35" ry="24" fill="#1a1a2e"/>
+          <ellipse cx="70" cy="33" rx="35" ry="22" fill="#16213e"/>
+          <rect x="39" y="25" width="62" height="5" rx="2" fill="url(#gold-trim)"/>
+          <ellipse cx="70" cy="16" rx="22" ry="11" fill="#16213e"/>
+
+          <!-- Head -->
+          <ellipse cx="70" cy="65" rx="21" ry="23" fill="url(#skin)"/>
+          <!-- Eyes (closed - feeling the music) -->
+          <path d="M58 63 Q62 60 66 63" stroke="#1a1a2e" stroke-width="2.5" fill="none"/>
+          <path d="M74 63 Q78 60 82 63" stroke="#1a1a2e" stroke-width="2.5" fill="none"/>
+          <!-- Mustache -->
+          <path d="M58 74 Q63 69 70 74 Q77 69 82 74" stroke="#3d2b1f" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Puffed cheeks (blowing trumpet) -->
+          <ellipse cx="55" cy="76" rx="6" ry="5" fill="#d4a574" opacity="0.6"/>
+          <ellipse cx="85" cy="76" rx="6" ry="5" fill="#d4a574" opacity="0.6"/>
+
+          <!-- Body -->
+          <path d="M44 86 L38 205 L102 205 L96 86 Q70 78 44 86Z" fill="url(#suit)"/>
+          <!-- Gold trim -->
+          <line x1="54" y1="90" x2="54" y2="200" stroke="#daa520" stroke-width="1.5"/>
+          <line x1="86" y1="90" x2="86" y2="200" stroke="#daa520" stroke-width="1.5"/>
+          <!-- Buttons -->
+          <circle cx="70" cy="108" r="3" fill="#ffd700"/>
+          <circle cx="70" cy="128" r="3" fill="#ffd700"/>
+          <circle cx="70" cy="148" r="3" fill="#ffd700"/>
+          <!-- Bow tie -->
+          <path d="M58 88 L70 92 L82 88 L70 96Z" fill="#c41e3a"/>
+
+          <!-- Arms holding trumpet -->
+          <path d="M44 95 Q30 125 40 148" stroke="url(#skin)" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M96 95 Q110 125 100 148" stroke="url(#skin)" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <circle cx="40" cy="148" r="8" fill="#c4956a"/>
+          <circle cx="100" cy="148" r="8" fill="#c4956a"/>
+
+          <!-- Trumpet -->
+          <rect x="42" y="140" width="60" height="8" rx="4" fill="#daa520"/>
+          <rect x="52" y="136" width="4" height="16" rx="2" fill="#b8860b"/>
+          <rect x="64" y="136" width="4" height="16" rx="2" fill="#b8860b"/>
+          <rect x="76" y="136" width="4" height="16" rx="2" fill="#b8860b"/>
+          <!-- Bell -->
+          <ellipse cx="108" cy="144" rx="12" ry="16" fill="url(#trumpet-bell)"/>
+          <ellipse cx="108" cy="144" rx="8" ry="11" fill="#8B6914" opacity="0.3"/>
+          <!-- Mouthpiece -->
+          <rect x="34" y="142" width="12" height="4" rx="2" fill="#b8860b"/>
+
+          <!-- Pants -->
+          <rect x="40" y="200" width="27" height="82" rx="4" fill="#1a1a2e"/>
+          <rect x="73" y="200" width="27" height="82" rx="4" fill="#1a1a2e"/>
+          <line x1="42" y1="205" x2="42" y2="278" stroke="#daa520" stroke-width="1.5"/>
+          <line x1="98" y1="205" x2="98" y2="278" stroke="#daa520" stroke-width="1.5"/>
+          <!-- Boots -->
+          <rect x="38" y="275" width="32" height="14" rx="6" fill="#2d1b0e"/>
+          <rect x="70" y="275" width="32" height="14" rx="6" fill="#2d1b0e"/>
+        </g>
+
+        <!-- ===== VIOLIN PLAYER (RIGHT) ===== -->
+        <g class="musician-sway" transform="translate(390, 20)">
+          <!-- Sombrero -->
+          <ellipse cx="70" cy="42" rx="52" ry="10" fill="#1a1a2e"/>
+          <ellipse cx="70" cy="38" rx="32" ry="22" fill="#1a1a2e"/>
+          <ellipse cx="70" cy="38" rx="32" ry="20" fill="#16213e"/>
+          <rect x="42" y="30" width="56" height="4" rx="2" fill="url(#gold-trim)"/>
+          <ellipse cx="70" cy="22" rx="20" ry="10" fill="#16213e"/>
+
+          <!-- Head (tilted slightly toward violin) -->
+          <ellipse cx="70" cy="68" rx="20" ry="22" fill="url(#skin)" transform="rotate(-5, 70, 68)"/>
+          <!-- Eyes -->
+          <ellipse cx="62" cy="66" rx="3" ry="3.5" fill="#1a1a2e"/>
+          <ellipse cx="78" cy="66" rx="3" ry="3.5" fill="#1a1a2e"/>
+          <!-- Mustache -->
+          <path d="M60 76 Q65 72 70 76 Q75 72 80 76" stroke="#3d2b1f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Smile -->
+          <path d="M63 80 Q70 86 77 80" stroke="#a0522d" stroke-width="1.5" fill="none"/>
+
+          <!-- Body -->
+          <path d="M45 88 L40 200 L100 200 L95 88 Q70 82 45 88Z" fill="url(#suit)"/>
+          <line x1="55" y1="92" x2="55" y2="195" stroke="#daa520" stroke-width="1.5"/>
+          <line x1="85" y1="92" x2="85" y2="195" stroke="#daa520" stroke-width="1.5"/>
+          <circle cx="70" cy="110" r="3" fill="#ffd700"/>
+          <circle cx="70" cy="130" r="3" fill="#ffd700"/>
+          <circle cx="70" cy="150" r="3" fill="#ffd700"/>
+          <path d="M60 90 L70 94 L80 90 L70 98Z" fill="#c41e3a"/>
+
+          <!-- Left arm (holding violin up) -->
+          <path d="M45 95 Q25 110 30 135" stroke="url(#skin)" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <!-- Right arm (bow arm) -->
+          <path d="M95 95 Q120 130 110 170" stroke="url(#skin)" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <circle cx="30" cy="135" r="8" fill="#c4956a"/>
+          <circle cx="110" cy="170" r="8" fill="#c4956a"/>
+
+          <!-- Violin body -->
+          <ellipse cx="32" cy="115" rx="14" ry="10" fill="#8B4513" transform="rotate(-30, 32, 115)"/>
+          <ellipse cx="28" cy="130" rx="16" ry="12" fill="#8B4513" transform="rotate(-30, 28, 130)"/>
+          <rect x="20" y="98" width="4" height="30" rx="2" fill="#654321" transform="rotate(-30, 22, 113)"/>
+          <!-- F-holes -->
+          <path d="M24 120 Q26 116 28 120" stroke="#3d2b1f" stroke-width="1" fill="none"/>
+          <path d="M32 118 Q34 114 36 118" stroke="#3d2b1f" stroke-width="1" fill="none"/>
+          <!-- Violin neck -->
+          <rect x="36" y="90" width="4" height="30" rx="2" fill="#654321" transform="rotate(20, 38, 105)"/>
+          <!-- Bow -->
+          <line x1="10" y1="105" x2="55" y2="140" stroke="#d2b48c" stroke-width="2"/>
+          <line x1="10" y1="105" x2="55" y2="140" stroke="#e8d5b5" stroke-width="0.5"/>
+
+          <!-- Pants -->
+          <rect x="42" y="195" width="25" height="80" rx="4" fill="#1a1a2e"/>
+          <rect x="73" y="195" width="25" height="80" rx="4" fill="#1a1a2e"/>
+          <line x1="44" y1="200" x2="44" y2="270" stroke="#daa520" stroke-width="1.5"/>
+          <line x1="96" y1="200" x2="96" y2="270" stroke="#daa520" stroke-width="1.5"/>
+          <rect x="40" y="268" width="30" height="14" rx="6" fill="#2d1b0e"/>
+          <rect x="70" y="268" width="30" height="14" rx="6" fill="#2d1b0e"/>
+        </g>
+      </svg>
+
+      <button class="music-btn" id="musicBtn">
+        <span class="btn-icon" id="musicIcon">&#9654;</span>
+        <span id="musicLabel">Play Serenade</span>
+        <span class="equalizer paused" id="equalizer">
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
   <script>
     const zone = document.getElementById("zone");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
     const result = document.getElementById("result");
     const hint = document.getElementById("hint");
+    const mainCard = document.getElementById("mainCard");
+    const serenadeOverlay = document.getElementById("serenadeOverlay");
 
     /* ---------- CONFETTI ---------- */
     const confettiCanvas = document.getElementById("confettiCanvas");
@@ -289,16 +756,298 @@
 
     noBtn.addEventListener("click", e => e.preventDefault());
 
-    /* ---------- YES CLICK ---------- */
+    /* ========== SERENADE PAGE SETUP ========== */
+
+    // Generate stars
+    const starsContainer = document.getElementById("starsContainer");
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 60 + "%";
+      star.style.animationDelay = (Math.random() * 3) + "s";
+      star.style.width = star.style.height = (Math.random() * 3 + 1) + "px";
+      starsContainer.appendChild(star);
+    }
+
+    // Generate floating musical notes
+    const notesContainer = document.getElementById("floatingNotes");
+    const noteSymbols = ["\u266A", "\u266B", "\u266C", "\u2669"];
+    const noteColors = ["#ffd700", "#ff6b9d", "#ff9ec6", "#ffb347", "#fff"];
+    let notesInterval = null;
+
+    function spawnNote() {
+      const note = document.createElement("div");
+      note.className = "music-note";
+      note.textContent = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
+      note.style.left = (10 + Math.random() * 80) + "%";
+      note.style.bottom = "5%";
+      note.style.color = noteColors[Math.floor(Math.random() * noteColors.length)];
+      note.style.fontSize = (20 + Math.random() * 20) + "px";
+      note.style.animationDuration = (3 + Math.random() * 3) + "s";
+      note.style.animationDelay = "0s";
+      notesContainer.appendChild(note);
+      setTimeout(() => note.remove(), 6000);
+    }
+
+    // Generate floating hearts
+    function spawnHeart() {
+      const heart = document.createElement("div");
+      heart.className = "floating-heart";
+      heart.textContent = ["&#10084;", "&#128151;", "&#128155;"][Math.floor(Math.random() * 3)];
+      heart.innerHTML = ["&#10084;", "&#128151;", "&#128155;"][Math.floor(Math.random() * 3)];
+      heart.style.left = (5 + Math.random() * 90) + "%";
+      heart.style.bottom = "-5%";
+      heart.style.fontSize = (14 + Math.random() * 18) + "px";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      heart.style.animationDelay = "0s";
+      notesContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    /* ========== WEB AUDIO API - MARIACHI MELODY ========== */
+    let audioCtx = null;
+    let isPlaying = false;
+    let melodyTimeouts = [];
+    let currentLoop = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    // Note frequencies
+    const NOTES = {
+      C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00,
+      A4: 440.00, B4: 493.88, C5: 523.25, D5: 587.33, E5: 659.25,
+      F5: 698.46, G5: 783.99, A5: 880.00,
+      Bb4: 466.16, Eb4: 311.13, Ab4: 415.30,
+      Db5: 554.37, Gb4: 369.99, Bb3: 233.08,
+      F3: 174.61, G3: 196.00, A3: 220.00, C3: 130.81, E3: 164.81, D3: 146.83
+    };
+
+    function playNote(freq, startTime, duration, type, gainVal, ctx, masterGain) {
+      const osc = ctx.createOscillator();
+      const noteGain = ctx.createGain();
+
+      osc.type = type || "triangle";
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      // Slight vibrato for warmth
+      const vibrato = ctx.createOscillator();
+      const vibratoGain = ctx.createGain();
+      vibrato.frequency.setValueAtTime(5, startTime);
+      vibratoGain.gain.setValueAtTime(3, startTime);
+      vibrato.connect(vibratoGain);
+      vibratoGain.connect(osc.frequency);
+      vibrato.start(startTime);
+      vibrato.stop(startTime + duration);
+
+      noteGain.gain.setValueAtTime(0, startTime);
+      noteGain.gain.linearRampToValueAtTime(gainVal || 0.15, startTime + 0.03);
+      noteGain.gain.setValueAtTime(gainVal || 0.15, startTime + duration - 0.05);
+      noteGain.gain.linearRampToValueAtTime(0, startTime + duration);
+
+      osc.connect(noteGain);
+      noteGain.connect(masterGain);
+
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    }
+
+    function playTrumpetNote(freq, startTime, duration, ctx, masterGain) {
+      // Layered oscillators for brassy trumpet sound
+      const types = ["sawtooth", "square"];
+      const gains = [0.08, 0.04];
+      types.forEach((type, i) => {
+        playNote(freq, startTime, duration, type, gains[i], ctx, masterGain);
+      });
+    }
+
+    function playGuitarStrum(freqs, startTime, ctx, masterGain) {
+      freqs.forEach((freq, i) => {
+        const delay = i * 0.025;
+        playNote(freq, startTime + delay, 0.5, "triangle", 0.06, ctx, masterGain);
+      });
+    }
+
+    function playMariachiMelody() {
+      const ctx = getAudioContext();
+      if (ctx.state === "suspended") ctx.resume();
+
+      const masterGain = ctx.createGain();
+      masterGain.gain.setValueAtTime(0.7, ctx.currentTime);
+      masterGain.connect(ctx.destination);
+
+      const t = ctx.currentTime + 0.1;
+      const bpm = 140;
+      const beat = 60 / bpm;
+
+      // Trumpet melody - a lively romantic mariachi phrase
+      const trumpetMelody = [
+        // Phrase 1 - opening fanfare
+        { note: "G4", time: 0, dur: beat },
+        { note: "A4", time: beat, dur: beat * 0.5 },
+        { note: "B4", time: beat * 1.5, dur: beat * 0.5 },
+        { note: "C5", time: beat * 2, dur: beat * 1.5 },
+        { note: "B4", time: beat * 3.5, dur: beat * 0.5 },
+        { note: "A4", time: beat * 4, dur: beat },
+        { note: "G4", time: beat * 5, dur: beat * 2 },
+
+        // Phrase 2 - ascending passion
+        { note: "A4", time: beat * 8, dur: beat * 0.5 },
+        { note: "B4", time: beat * 8.5, dur: beat * 0.5 },
+        { note: "C5", time: beat * 9, dur: beat },
+        { note: "D5", time: beat * 10, dur: beat },
+        { note: "E5", time: beat * 11, dur: beat * 2 },
+        { note: "D5", time: beat * 13, dur: beat },
+        { note: "C5", time: beat * 14, dur: beat },
+        { note: "B4", time: beat * 15, dur: beat * 2 },
+
+        // Phrase 3 - call and response
+        { note: "C5", time: beat * 18, dur: beat * 0.75 },
+        { note: "C5", time: beat * 19, dur: beat * 0.75 },
+        { note: "B4", time: beat * 20, dur: beat * 0.5 },
+        { note: "A4", time: beat * 20.5, dur: beat * 0.5 },
+        { note: "G4", time: beat * 21, dur: beat * 1.5 },
+        { note: "A4", time: beat * 23, dur: beat },
+        { note: "B4", time: beat * 24, dur: beat },
+        { note: "C5", time: beat * 25, dur: beat * 3 },
+
+        // Phrase 4 - grand finish
+        { note: "E5", time: beat * 29, dur: beat },
+        { note: "D5", time: beat * 30, dur: beat * 0.5 },
+        { note: "C5", time: beat * 30.5, dur: beat * 0.5 },
+        { note: "D5", time: beat * 31, dur: beat * 2 },
+        { note: "C5", time: beat * 33, dur: beat * 3 },
+      ];
+
+      trumpetMelody.forEach(n => {
+        playTrumpetNote(NOTES[n.note], t + n.time, n.dur, ctx, masterGain);
+      });
+
+      // Guitar rhythm (strumming pattern on beats)
+      const chords = {
+        C: [NOTES.C3, NOTES.E3, NOTES.G3, NOTES.C4, NOTES.E4],
+        G: [NOTES.G3, NOTES.D4, NOTES.G4, NOTES.B4],
+        Am: [NOTES.A3, NOTES.E3, NOTES.A4, NOTES.C4],
+        F: [NOTES.F3, NOTES.A3, NOTES.C4, NOTES.F4],
+        Em: [NOTES.E3, NOTES.G3, NOTES.B4, NOTES.E4]
+      };
+
+      const guitarPattern = [
+        { chord: "C", time: 0 },     { chord: "C", time: beat * 2 },
+        { chord: "G", time: beat * 4 }, { chord: "G", time: beat * 6 },
+        { chord: "Am", time: beat * 8 }, { chord: "Am", time: beat * 10 },
+        { chord: "F", time: beat * 12 }, { chord: "G", time: beat * 14 },
+        { chord: "C", time: beat * 16 }, { chord: "C", time: beat * 18 },
+        { chord: "G", time: beat * 20 }, { chord: "G", time: beat * 22 },
+        { chord: "Am", time: beat * 24 }, { chord: "F", time: beat * 26 },
+        { chord: "G", time: beat * 28 }, { chord: "G", time: beat * 30 },
+        { chord: "C", time: beat * 32 }, { chord: "C", time: beat * 34 },
+      ];
+
+      guitarPattern.forEach(g => {
+        playGuitarStrum(chords[g.chord], t + g.time, ctx, masterGain);
+      });
+
+      // Violin harmony (higher register, softer)
+      const violinHarmony = [
+        { note: "E5", time: 0, dur: beat * 2 },
+        { note: "D5", time: beat * 2, dur: beat * 2 },
+        { note: "C5", time: beat * 4, dur: beat * 2 },
+        { note: "B4", time: beat * 6, dur: beat * 2 },
+        { note: "C5", time: beat * 8, dur: beat * 4 },
+        { note: "E5", time: beat * 12, dur: beat * 2 },
+        { note: "D5", time: beat * 14, dur: beat * 2 },
+        { note: "E5", time: beat * 16, dur: beat * 4 },
+        { note: "G5", time: beat * 20, dur: beat * 2 },
+        { note: "F5", time: beat * 22, dur: beat * 2 },
+        { note: "E5", time: beat * 24, dur: beat * 4 },
+        { note: "D5", time: beat * 28, dur: beat * 2 },
+        { note: "E5", time: beat * 30, dur: beat * 2 },
+        { note: "C5", time: beat * 32, dur: beat * 4 },
+      ];
+
+      violinHarmony.forEach(n => {
+        playNote(NOTES[n.note], t + n.time, n.dur, "sine", 0.07, ctx, masterGain);
+      });
+
+      // Total duration of this loop
+      const totalDuration = beat * 36;
+
+      // Schedule next loop
+      const loopTimeout = setTimeout(() => {
+        if (isPlaying) playMariachiMelody();
+      }, totalDuration * 1000);
+
+      melodyTimeouts.push(loopTimeout);
+    }
+
+    function stopMusic() {
+      melodyTimeouts.forEach(t => clearTimeout(t));
+      melodyTimeouts = [];
+      if (audioCtx) {
+        audioCtx.close();
+        audioCtx = null;
+      }
+    }
+
+    /* ---------- MUSIC BUTTON ---------- */
+    const musicBtn = document.getElementById("musicBtn");
+    const musicIcon = document.getElementById("musicIcon");
+    const musicLabel = document.getElementById("musicLabel");
+    const equalizer = document.getElementById("equalizer");
+
+    musicBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        isPlaying = true;
+        musicIcon.innerHTML = "&#10074;&#10074;";
+        musicLabel.textContent = "Pause Serenade";
+        equalizer.classList.remove("paused");
+        playMariachiMelody();
+
+        // Start note and heart spawning
+        notesInterval = setInterval(() => {
+          spawnNote();
+          if (Math.random() > 0.5) spawnHeart();
+        }, 500);
+      } else {
+        isPlaying = false;
+        musicIcon.innerHTML = "&#9654;";
+        musicLabel.textContent = "Play Serenade";
+        equalizer.classList.add("paused");
+        stopMusic();
+
+        if (notesInterval) {
+          clearInterval(notesInterval);
+          notesInterval = null;
+        }
+      }
+    });
+
+    /* ---------- YES CLICK → SERENADE ---------- */
     yesBtn.addEventListener("click", () => {
       zone.style.display = "none";
-      hint.style.display = "none";     // HIDE THE HINT
-      result.style.display = "block";
+      hint.style.display = "none";
+
+      // Brief confetti burst
       resizeConfettiCanvas();
       fullScreenConfetti();
+
+      // Transition to serenade after a short delay
+      setTimeout(() => {
+        mainCard.style.display = "none";
+        serenadeOverlay.classList.add("active");
+
+        // Spawn initial ambient hearts
+        for (let i = 0; i < 6; i++) {
+          setTimeout(() => spawnHeart(), i * 300);
+        }
+      }, 1200);
     });
   </script>
 </body>
 </html>
-
-
