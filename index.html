@@ -228,8 +228,8 @@
       transform-origin: bottom center;
       animation: sway 2s ease-in-out infinite alternate;
     }
-    .musician-sway:nth-child(2) { animation-delay: 0.3s; }
-    .musician-sway:nth-child(3) { animation-delay: 0.6s; }
+    .musician-pos:nth-child(2) .musician-sway { animation-delay: 0.3s; }
+    .musician-pos:nth-child(3) .musician-sway { animation-delay: 0.6s; }
 
     @keyframes sway {
       from { transform: rotate(-2deg); }
@@ -466,7 +466,7 @@
         </defs>
 
         <!-- ===== GUITARIST (LEFT) ===== -->
-        <g class="musician-sway" transform="translate(80, 20)">
+        <g class="musician-pos" transform="translate(80, 20)"><g class="musician-sway">
           <!-- Sombrero -->
           <ellipse cx="70" cy="42" rx="52" ry="10" fill="#1a1a2e"/>
           <ellipse cx="70" cy="38" rx="32" ry="22" fill="#1a1a2e"/>
@@ -523,10 +523,10 @@
           <!-- Boots -->
           <rect x="40" y="268" width="30" height="14" rx="6" fill="#2d1b0e"/>
           <rect x="70" y="268" width="30" height="14" rx="6" fill="#2d1b0e"/>
-        </g>
+        </g></g>
 
         <!-- ===== TRUMPET PLAYER (CENTER) ===== -->
-        <g class="musician-sway" transform="translate(230, 5)">
+        <g class="musician-pos" transform="translate(230, 5)"><g class="musician-sway">
           <!-- Sombrero (slightly larger - lead) -->
           <ellipse cx="70" cy="37" rx="56" ry="11" fill="#1a1a2e"/>
           <ellipse cx="70" cy="33" rx="35" ry="24" fill="#1a1a2e"/>
@@ -582,10 +582,10 @@
           <!-- Boots -->
           <rect x="38" y="275" width="32" height="14" rx="6" fill="#2d1b0e"/>
           <rect x="70" y="275" width="32" height="14" rx="6" fill="#2d1b0e"/>
-        </g>
+        </g></g>
 
         <!-- ===== VIOLIN PLAYER (RIGHT) ===== -->
-        <g class="musician-sway" transform="translate(390, 20)">
+        <g class="musician-pos" transform="translate(390, 20)"><g class="musician-sway">
           <!-- Sombrero -->
           <ellipse cx="70" cy="42" rx="52" ry="10" fill="#1a1a2e"/>
           <ellipse cx="70" cy="38" rx="32" ry="22" fill="#1a1a2e"/>
@@ -639,7 +639,7 @@
           <line x1="96" y1="200" x2="96" y2="270" stroke="#daa520" stroke-width="1.5"/>
           <rect x="40" y="268" width="30" height="14" rx="6" fill="#2d1b0e"/>
           <rect x="70" y="268" width="30" height="14" rx="6" fill="#2d1b0e"/>
-        </g>
+        </g></g>
       </svg>
 
       <button class="music-btn" id="musicBtn">
